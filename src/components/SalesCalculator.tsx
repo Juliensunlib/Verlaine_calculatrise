@@ -333,7 +333,11 @@ const SalesCalculator: React.FC = () => {
           monthlyPaymentYear1TTC = monthlyPaymentYear1HT * 1.20;
           monthlyPaymentYear2HT = monthlyPaymentHT * 0.965;
           monthlyPaymentYear2TTC = monthlyPaymentYear2HT * 1.20;
-          monthlyPaymentYear3PlusHT = monthlyPaymentHT * 1.07527175;
+
+          // Année 3+ : appliquer les augmentations successives avec arrondis intermédiaires
+          const year2Increase = Math.round(monthlyPaymentHT * 1.015 * 100) / 100;
+          const year3Increase = Math.round(year2Increase * 1.015 * 100) / 100;
+          monthlyPaymentYear3PlusHT = Math.round(year3Increase * 1.045 * 100) / 100;
           monthlyPaymentYear3PlusTTC = monthlyPaymentYear3PlusHT * 1.20;
         }
       }
